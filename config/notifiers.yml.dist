@@ -65,7 +65,7 @@ XmppNotifier:
       type: groupchat
 HipchatNotifier:
   review-request:
-    enabled: 1
+    enabled: 0
     message: "New review request for branch %branch%"
     add-links: 1
     notify: 0
