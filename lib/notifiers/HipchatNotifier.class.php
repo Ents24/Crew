@@ -31,10 +31,16 @@ class HipchatNotifier extends SimpleNotifier
 
     $notify = isset($eventConfig['notify']) && $eventConfig['notify'] == '1';
 
+    $branch = $this->arguments['object'];
+    $newBranchStatus = $this->getLabelStatus($branch->getStatus());
+
     $color = Hipchat::COLOR_YELLOW;
-    if (isset($eventConfig['color']))
-    {
-      $color = $eventConfig['color'];
+    if ($newBranchStatus == "ok") {
+		$color = Hipchat::COLOR_GREEN;
+    } else if($newBranchStatus == "ko") {
+		$color = Hipchat::COLOR_RED;
+    } else if (isset($eventConfig['color'])) {
+        $color = $eventConfig['color'];
     }
 
     $hipChat = new HipChat($token);
