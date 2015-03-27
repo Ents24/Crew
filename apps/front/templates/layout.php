@@ -4,7 +4,7 @@
     <?php include_http_metas() ?>
     <?php include_metas() ?>
     <?php include_title() ?>
-    <link rel="shortcut icon" href="/crew/favicon.ico" />
+    <link rel="icon" type="image/png" href="<?php echo image_path('favicon.png')?>" />
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
   </head>
