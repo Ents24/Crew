@@ -70,7 +70,15 @@ class fileListAction extends crewAction
       $commitTo, 
       false
     );
-    
+
+    $jenkins = new Jenkins("http://jenkins.dev.ents24.com");
+    $jobNames = ["Acceptance Tests", "Unit Tests"];
+    $this->jobResults = [];
+
+    foreach ($jobNames as $jobName) {
+      $this->jobResults[$jobName] = $jenkins->findBuildForBranch($jobName, $this->branch->getName());
+    }
+
     $this->files = array();
     foreach ($files as $file)
     {

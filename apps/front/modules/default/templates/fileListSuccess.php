@@ -23,6 +23,16 @@
   <div class="list_head diff-range<?php $readonly && print " displayed"; ?>">
     <?php include_component('default', 'selectorDiffRange', array('type' => 'branch', 'id' => $branch->getId())); ?>
   </div>
+    <div class="list_head">
+    <span class="title">Build status : </span>
+    <?php foreach($jobResults as $jobName => $build): ?>
+      <?php if($build != null) : ?>
+        <?=$jobName?> = <a href="<?=$build->url?>"><span class="build_result_<?=strtolower($build->result)?>"><?=$build->result?></span></a>
+      <?php else: ?>
+        <?=$jobName?> = NONE
+      <?php endif; ?>
+    <?php endforeach; ?>
+  </div>
   <?php $pathDirOld = ""; ?>
   <?php $maxLength = 110; ?>
   <?php $defaultParametersUrlFile = array(

@@ -12,6 +12,7 @@ class ProjectConfiguration extends sfProjectConfiguration
     $this->enablePlugins('crewLessPlugin');
     require_once sfConfig::get('sf_root_dir') . '/lib/vendor/XMPPHP/XMPP.php';
     require_once sfConfig::get('sf_root_dir') . '/lib/vendor/HipChat/HipChat.php';
+    require_once sfConfig::get('sf_root_dir') . '/lib/vendor/Jenkins.php';
 
     $this->dispatcher->connect('context.load_factories', array($this, 'listenLoadFactoriesEvent'));
   }

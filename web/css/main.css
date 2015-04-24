@@ -78,6 +78,9 @@
 }
 .list .list_head .status > a.status-valid { background:url('../images/accept.gif') 0 0 no-repeat; }
 .list .list_head .status > a.status-invalid { background:url('../images/cancel.gif') 0 0 no-repeat; }
+.list .list_head .build_result_success { color:green; }
+.list .list_head .build_result_unstable { color:yellow; }
+.list .list_head .build_result_failure { color:red; }
 .list .list_body.scrollable {
   max-height:228px;
   overflow-y:scroll;
