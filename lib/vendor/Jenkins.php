@@ -17,6 +17,9 @@ class Jenkins
 
     foreach($builds->builds as $build) {
       if(strpos($build->displayName, $branchName) === 0) {
+        if($build->building == true) {
+          $build->result = "RUNNING";
+        }
         return $build;
       }
     }
@@ -27,7 +30,7 @@ class Jenkins
   public function getBuildsForJob($jobName)
   {
     $endpoint = "/job/$jobName";
-    $tree     = "builds[number,displayName,result,url]";
+    $tree     = "builds[number,displayName,result,url,building]";
 
     return $this->makeRequest($endpoint, $tree);
   }
