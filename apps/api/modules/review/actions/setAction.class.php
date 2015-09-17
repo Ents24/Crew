@@ -11,6 +11,7 @@ class setAction extends crewAction
     $projectId      = $request->getParameter('project_id');
     $baseBranchName = $request->getParameter('base_branch');
     $branchName     = $request->getParameter('branch');
+    $quiet          = $request->getParameter('quiet', false);
     $commit         = (string)$request->getParameter('commit'); // Last commit
     $result         = array();
 
@@ -69,7 +70,9 @@ class setAction extends crewAction
               ->save();
             
             $this->getResponse()->setStatusCode('201');
-            $this->dispatcher->notify(new sfEvent($this, 'notification.review-request', array('project-id' => $branch->getRepositoryId(), 'object' => $branch)));
+            if(!$quiet) {
+              $this->dispatcher->notify(new sfEvent($this, 'notification.review-request', array('project-id' => $branch->getRepositoryId(), 'object' => $branch)));
+            }
           }
           else
           {
