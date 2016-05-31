@@ -19,6 +19,7 @@
         ); ?>
         <?php if ('D' !== $file->getState() && !$file->getIsBinary()): ?>
           <?php echo link_to('View file', 'default/fileContent', array('title' => 'View entire file', 'query_string' => http_build_query(array_merge($defaultParametersUrlFile, array('file' => $file->getId()))), 'target' => '_blank')) ?>
+          <?php echo link_to('Hide whitespace', 'default/file', array('title' => 'Hide Whitespace Changes', 'query_string' => http_build_query(array_merge($defaultParametersUrlFile, array('file' => $file->getId(), 's' => true))))) ?>
         <?php endif; ?>
         <?php if (null !== $previousFileId): ?>
           <?php echo link_to('<< Previous file', 'default/file', array('title' => 'Previous file', 'query_string' => http_build_query(array_merge($defaultParametersUrlFile, array('file' => $previousFileId))), 'class' => 'previous')) ?>
