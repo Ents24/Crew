@@ -4,3 +4,8 @@ all:
     profile_field_name: sf_guard_user_id
     signin_form:        FormSignin
   max_number_of_files_to_review: 4096
+  jenkins_url: http://jenkins.dev.ents24.com
+  jenkins:
+    enabled: true
+    url: http://jenkins.dev.ents24.com
+    jobs: ["Acceptance Tests", "Unit Tests"]

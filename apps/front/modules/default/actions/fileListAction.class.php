@@ -71,12 +71,20 @@ class fileListAction extends crewAction
       false
     );
 
-    $jenkins = new Jenkins("http://jenkins.dev.ents24.com");
-    $jobNames = ["Acceptance Tests", "Unit Tests"];
+    $jenkinsEnabled = sfConfig::get('app_jenkins_enabled', false);
     $this->jobResults = [];
+    if($jenkinsEnabled) {
+      $jenkinsUrl = sfConfig::get('app_jenkins_url', null);
+      $jobNames = sfConfig::get('app_jenkins_jobs', null);
+      $jenkins = new Jenkins($jenkinsUrl);
 
-    foreach ($jobNames as $jobName) {
-      $this->jobResults[$jobName] = $jenkins->findBuildForBranch($jobName, $this->branch->getName());
+      try {
+        foreach ($jobNames as $jobName) {
+          $this->jobResults[$jobName] = $jenkins->findBuildForBranch($jobName, $this->branch->getName());
+        }   
+      } catch (Exception $e) {
+        //Jenkins is unavailable? Skip loading any job results.
+      }
     }
 
     $this->files = array();
