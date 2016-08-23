@@ -34,7 +34,7 @@
         <?php include_component('default', 'selectorDiffRange', array('type' => 'file', 'id' => $file->getId())); ?>
       </div>
       <?php if(!$file->getIsBinary()): ?>
-        <table>
+        <table id="minimapcontent">
           <tbody>
           <?php $deleledLinesCounter = 0; ?>
           <?php $addedLinesCounter = 0; ?>
@@ -113,3 +113,8 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#minimapcontent').minimap();
+  })
+</script>
