@@ -44,7 +44,8 @@
 }
 .list .list_head.scroll.fixed {
   position:fixed;
-  top:0;
+  top:32px;
+  width:calc(100% - 42px);
   z-index:1;
   box-shadow:0 2px 5px rgba(0,0,0,0.1);
   -webkit-box-shadow:0 2px 5px rgba(0,0,0,0.1);
@@ -1131,3 +1132,9 @@ html body .footer .logoCrew:hover { opacity:1; }
 }
 .clickable { cursor:pointer; }
 #admin_project_add { width:510px; }
+.breadcrumb.fixed {
+  position:fixed !important;
+  background:#ffffff;
+  width:100%;
+  top:0;
+}
