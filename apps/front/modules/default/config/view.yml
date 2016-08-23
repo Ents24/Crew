@@ -4,6 +4,10 @@ fileSuccess:
     - fixedListHead.js
     - fileNavigation.js
     - toggleDiffRange.js
+    - vendor/minimap.min.js
+  stylesheets:
+    - vendor/minimap.min.css
+
 fileContentSuccess:
   layout: highlightFile
 

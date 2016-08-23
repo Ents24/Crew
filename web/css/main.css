@@ -1145,3 +1145,9 @@ html body .footer .logoCrew:hover { opacity:1; }
 }
 .clickable { cursor:pointer; }
 #admin_project_add { width:510px; }
+.minimap .line.deleted {
+  background:#FF0000 !important;
+}
+.minimap .line.added {
+  background:#00FF00 !important;
+}
