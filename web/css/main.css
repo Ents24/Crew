@@ -1138,3 +1138,9 @@ html body .footer .logoCrew:hover { opacity:1; }
   width:100%;
   top:0;
 }
+.minimap .line.deleted {
+  background:#FF0000 !important;
+}
+.minimap .line.added {
+  background:#00FF00 !important;
+}

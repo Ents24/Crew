@@ -1,4 +1,4 @@
-<div class="file_bloc">
+<div class="file_bloc" id='minimapcontent'>
   <div class="list">
     <div class="list_head scroll">
       <span class="clickable icon-caret-<?php echo $readonly ? 'up' : 'down'; ?> tooltip toggle-diff-range" title="Click to see the diff range selector"></span>
@@ -87,3 +87,14 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#minimapcontent').minimap({
+      offsetHeightRatio: 0.05,
+      offsetWidthRatio: 0.005,
+      heightRatio: 0.9,
+      widthRatio: 0.016,
+      smoothScroll: false
+    });
+  })
+</script>
