@@ -45,7 +45,7 @@
 .list .list_head.scroll.fixed {
   position:fixed;
   top:32px;
-  width:calc(100% - 42px);
+  width:calc(100% - 106px);
   z-index:1;
   box-shadow:0 2px 5px rgba(0,0,0,0.1);
   -webkit-box-shadow:0 2px 5px rgba(0,0,0,0.1);
@@ -982,7 +982,7 @@ html body .site {
 }
 html body .site .page {
   line-height:1.4em;
-  margin:0 auto 15px auto;
+  margin:0 32px 15px 32px;
   position:relative;
   padding-top:32px;
 }
