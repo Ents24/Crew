@@ -1144,3 +1144,15 @@ html body .footer .logoCrew:hover { opacity:1; }
 .minimap .line.added {
   background:#00FF00 !important;
 }
+#shortcutsHelp {
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:#ffffff;
+  padding:10px;
+  z-index:2000;
+  box-shadow:2px 2px 8px rgba(0,0,0,0.2);
+  -webkit-box-shadow:2px 2px 8px rgba(0,0,0,0.2);
+  -moz-box-shadow:2px 2px 8px rgba(0,0,0,0.2);
+}

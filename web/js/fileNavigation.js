@@ -32,6 +32,43 @@ $(document).ready(function() {
     }
   };
 
+  var changeStatus = function (selector) {
+    $(selector).click();
+  };
+
+  var toggleDiffOnly = function () {
+    var $lines = $('td[class="line "]');
+    // .toggle() is unbeliveably slow
+    if ($lines.first().is(':visible')) {
+      $lines.parent().hide();
+    } else {
+      $lines.parent().show();
+    }
+  };
+
+  var toggleHelp = function () {
+    var $help = $('#shortcutsHelp');
+    // keep the keypress handler and the list of keys help in the same file!
+    if ($help.prop('tagName') == null) {
+      $('<div/>', {
+          'id':'shortcutsHelp',
+          'html':'\
+<h2>Keyboard Shourtcuts</h2>\
+<kbd>U</kbd> = change to Todo<br>\
+<kbd>I</kbd> = change to Invalid<br>\
+<kbd>O</kbd> = change to Valid<br>\
+<kbd>D</kbd> = show diffs only<br>\
+<kbd>K</kbd> = previous change<br>\
+<kbd>J</kbd> = next change<br>\
+<kbd>H</kbd> = previous file<br>\
+<kbd>L</kbd> = next file<br>\
+          '
+      }).appendTo('body');
+    } else {
+      $help.toggle();
+    }
+  };
+
   $(document)
     .keydown(function(e) {
       if (e.target.type == 'textarea')
@@ -54,6 +91,26 @@ $(document).ready(function() {
           break;
         case 76: //l
           changeFile('a.next');
+          break;
+        case 73: //i
+          //invalid file
+          changeStatus('a.invalidate');
+          break;
+        case 79: //o
+          //valid file
+          changeStatus('a.validate');
+          break;
+        case 85: //u
+          //todo
+          changeStatus('a.todo');
+          break;
+        case 68: //d
+          //show only diff
+          toggleDiffOnly();
+          break;
+        case 191: //?
+          //toggle shortcuts help
+          toggleHelp();
           break;
       }
     })
