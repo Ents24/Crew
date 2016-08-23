@@ -37,7 +37,7 @@
 .list .list_head.scroll {
   position:absolute;
   top:0;
-  width:1008px;
+  width:calc(100% - 10px);
   border-color:#cccccc;
   border-style:solid;
   border-width:0 1px 1px 0;
@@ -990,7 +990,6 @@ html body .header ul#userbox li.username img.avatar {
 html body .header a#crew-logo { float:left; }
 html body .site {
   margin:10px auto 0;
-  width:1020px;
   padding:0 15px;
 }
 html body .site .page {
