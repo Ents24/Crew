@@ -2,6 +2,7 @@
 
 class selectorDiffRangeForm extends sfForm
 {
+  public $lastCommit;
 
   /**
    * @param array $defaults
@@ -36,6 +37,7 @@ class selectorDiffRangeForm extends sfForm
     $this->widgetSchema->setNameFormat('selector_diff[%s]');
     $commits = $this->buildCommits($branch);
     
+    $this->lastCommit = key($commits);
     end($commits);
     $defaultFrom = key($commits);
 
