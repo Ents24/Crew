@@ -22,6 +22,7 @@ class BranchPeer extends BaseBranchPeer {
   const A_TRAITER = 0;
   const OK        = 1;
   const KO        = 2;
+  const ONIT      = 3;
 
   /**
    * @static
@@ -38,6 +39,8 @@ class BranchPeer extends BaseBranchPeer {
         return 'ok';
       case BranchPeer::KO:
         return 'ko';
+      case BranchPeer::ONIT:
+        return 'on it';
     }
 
     return '';
@@ -48,6 +51,7 @@ class BranchPeer extends BaseBranchPeer {
     switch ($statusId)
     {
       case BranchPeer::A_TRAITER:
+      case BranchPeer::ONIT:
         return ':zzz:';
       case BranchPeer::OK:
         return ':thumbsup:';

@@ -3,7 +3,15 @@
 <?php /** @var int $id */ ?>
 <?php /** @var boolean $readonly */ ?>
 <?php
-$labelByStatus = array(
+if ($type == "branch") {
+  $labelByStatus = array(
+    BranchPeer::ONIT      => 'L',
+  );
+} else {
+  $labelByStatus = array();
+}
+
+$labelByStatus += array(
   BranchPeer::OK        => 'Ã',
   BranchPeer::KO        => 'Â',
   BranchPeer::A_TRAITER => '!',
@@ -12,11 +20,13 @@ $cssByStatus   = array(
   BranchPeer::OK        => 'validate',
   BranchPeer::KO        => 'invalidate',
   BranchPeer::A_TRAITER => 'todo',
+  BranchPeer::ONIT      => 'todo',
 );
 $titleByStatus = array(
   BranchPeer::OK        => 'Validated',
   BranchPeer::KO        => 'Invalidated',
   BranchPeer::A_TRAITER => 'Todo',
+  BranchPeer::ONIT      => "I'm on it",
 ); 
 ?>
 <?php if ($readonly): ?>
