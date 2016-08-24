@@ -31,19 +31,9 @@ class fileAction extends crewAction
       $options['ignore-all-space'] = true;
     }
 
-    $previousFiles = FileQuery::create()
-      ->select(array('Id', 'Filename'))
+    // use the same list as fileListAction.class.php
+    $files = FileQuery::create()
       ->filterByBranchId($this->file->getBranchId())
-      ->filterByFilename($this->file->getFilename(), Criteria::LESS_THAN)
-      ->orderByFilename(Criteria::DESC)
-      ->find()
-    ;
-
-    $nextFiles = FileQuery::create()
-      ->select(array('Id', 'Filename'))
-      ->filterByBranchId($this->file->getBranchId())
-      ->filterByFilename($this->file->getFilename(), Criteria::GREATER_THAN)
-      ->orderByFilename(Criteria::ASC)
       ->find()
     ;
 
@@ -71,8 +61,29 @@ class fileAction extends crewAction
       false
     );
     
-    $this->previousFileId = $this->findClosestFileId($previousFiles, $modifiedFiles);
-    $this->nextFileId     = $this->findClosestFileId($nextFiles, $modifiedFiles);
+    $lastId = $this->previousFileId = $this->nextFileId = null;
+    $getNext = false;
+    // iterate on the list only once and get both previous and next ids
+    foreach ($files as $file)
+    {
+      /** @var File $file  */
+      if (!isset($modifiedFiles[$file->getFilename()]))
+      {
+        continue;
+      }
+      if ($getNext) {
+        // save the current id as next id
+        $this->nextFileId = $file->getId();
+        break;
+      }
+      if ($this->file->getId() == $file->getId()) {
+        // save the last valid file's id as previous id
+        $this->previousFileId = $lastId;
+        // set flag so next iteration with a valid file will know what to do
+        $getNext = true;
+      }
+      $lastId = $file->getId();
+    }
 
     if ($this->file->getIsBinary())
     {
@@ -123,24 +134,4 @@ class fileAction extends crewAction
     $this->userId = $this->getUser()->getId();
   }
 
-  /**
-   * @param Traversable $files
-   * @param array       $modifiedFiles
-   *
-   * @return null
-   */
-  private function findClosestFileId(Traversable $files, array $modifiedFiles)
-  {
-    $fileId = null;
-    foreach ($files as $file)
-    {
-      if (isset($modifiedFiles[$file['Filename']]))
-      {
-        return $file['Id'];
-      }
-    }
-    
-    return null;
-  }
-  
 }
