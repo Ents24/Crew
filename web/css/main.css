@@ -279,6 +279,7 @@
 .list .dropdown-status li.dropdown .dropdown-toggle.ricon.invalidate { color:#ff686e; }
 .list .dropdown-status li.dropdown .dropdown-toggle.ricon.validate { color:#90d48b; }
 .list .dropdown-status li.dropdown .dropdown-toggle.ricon.todo { color:#aaaaaa; }
+.list .dropdown-status li.dropdown .dropdown-toggle.ricon.refactor { color:#aaaaff; }
 .list .dropdown-status li.dropdown.open {
   color:white;
   background-color:#666666;
@@ -295,6 +296,7 @@
   line-height:30px;
 }
 .list .dropdown-status li.dropdown .ricon.todo { font-size:20px; }
+.list .dropdown-status li.dropdown .ricon.refactor { font-size:20px; }
 .list .dropdown-status li.dropdown.open {
   color:white;
   background-color:#666666;

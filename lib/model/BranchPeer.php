@@ -23,6 +23,7 @@ class BranchPeer extends BaseBranchPeer {
   const OK        = 1;
   const KO        = 2;
   const ONIT      = 3;
+  const REFACT    = 4;
 
   /**
    * @static
@@ -41,6 +42,8 @@ class BranchPeer extends BaseBranchPeer {
         return 'ko';
       case BranchPeer::ONIT:
         return 'on it';
+      case BranchPeer::REFACT:
+        return 'refactor needed';
     }
 
     return '';
@@ -57,6 +60,8 @@ class BranchPeer extends BaseBranchPeer {
         return ':thumbsup:';
       case BranchPeer::KO:
         return ':thumbsdown:';
+      case BranchPeer::REFACT:
+        return ':hazard:';
     }
 
     return '';

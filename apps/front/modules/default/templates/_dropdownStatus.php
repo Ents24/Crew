@@ -8,7 +8,9 @@ if ($type == "branch") {
     BranchPeer::ONIT      => 'L',
   );
 } else {
-  $labelByStatus = array();
+  $labelByStatus = array(
+    BranchPeer::REFACT    => 'Å',
+  );
 }
 
 $labelByStatus += array(
@@ -21,12 +23,14 @@ $cssByStatus   = array(
   BranchPeer::KO        => 'invalidate',
   BranchPeer::A_TRAITER => 'todo',
   BranchPeer::ONIT      => 'todo',
+  BranchPeer::REFACT    => 'refactor',
 );
 $titleByStatus = array(
   BranchPeer::OK        => 'Validated',
   BranchPeer::KO        => 'Invalidated',
   BranchPeer::A_TRAITER => 'Todo',
   BranchPeer::ONIT      => "I'm on it",
+  BranchPeer::REFACT    => "Refactor needed",
 ); 
 ?>
 <?php if ($readonly): ?>
