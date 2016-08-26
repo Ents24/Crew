@@ -17,6 +17,9 @@
       <label for="view_files_tree" >tree</label> <input type="checkbox" checked id="view_files_tree" name="view_files_tree">
     </span>
     <div class="right status">
+      <span>
+        <progress max="100" value="<?=$readyPercent?>" title="<?=$readyPercent?>%"></progress>
+      </span>
       <?php include_partial('default/dropdownStatus', array('id' => $branch->getId(), 'status' => $branch->getStatus(), 'readonly' => $readonly, 'type' => 'branch')); ?>
     </div>
   </div>
