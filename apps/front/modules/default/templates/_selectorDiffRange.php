@@ -7,4 +7,6 @@
   to
   <?php echo $form['to']->render(array('class' => 'select2')); ?>
   <button type="submit" class="no-marge">Show</button>
+  <button id='btnResetRange' class="no-merge">Reset</button>
+  <small>last commit:</small> <?php echo $form->lastCommit; ?>
 </form>

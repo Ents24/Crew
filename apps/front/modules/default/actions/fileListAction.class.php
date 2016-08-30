@@ -71,6 +71,7 @@ class fileListAction extends crewAction
       false
     );
     
+    $cntValid = 0;
     $this->files = array();
     foreach ($files as $file)
     {
@@ -131,7 +132,13 @@ class fileListAction extends crewAction
         'NbFileCommentsNotChecked' => $fileCommentsCountNotChecked + $lineCommentsCountNotChecked,
         'LastCommentId'            => $lastCommentId
       ));
+
+      if ($file->getStatus() == BranchPeer::OK) {
+        $cntValid ++;
+      }
     }
+
+    $this->readyPercent = round($cntValid * 100 / count($this->files));
 
     usort($this->files, array('self', 'sortPath'));
     $this->statusActions = StatusActionPeer::getStatusActionsForBoard(null, $this->repository->getId(), $this->branch->getId());

@@ -19,5 +19,11 @@ $(document).ready(function(){
       
       return result;
     }
-  })
+  });
+
+  $('#btnResetRange').on('click', function(e) {
+    e.preventDefault();
+    var url = document.location.href.replace(/\/from\/[^\/]+\/to\/[^\/]+/,'');
+    document.location.href = url;
+  });
 });

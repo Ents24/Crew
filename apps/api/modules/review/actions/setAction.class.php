@@ -85,7 +85,11 @@ class setAction extends crewAction
       }
       else
       {
-        $result['message'] = sprintf("Unknown branch '%s' in project '%s'", $branchName, $repository->getName());
+        $result['message'] = sprintf("%s branch '%s' in project '%s'",
+          $this->gitCommand->hasBranch($repository->getGitDir(), $branch) ? "No commits in" : "Unknown",
+          $branchName,
+          $repository->getName()
+        );
         $this->getResponse()->setStatusCode('404');
       }
     }

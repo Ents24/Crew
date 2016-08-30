@@ -2,7 +2,8 @@
 
 $(document).ready(function()
 {
-  var $header = $('.list_head.scroll');
+  var $header = $('.breadcrumb');
+  var $header2 = $('.list_head.scroll');
 
   var top     = $header.offset().top - parseFloat($header.css('marginTop').replace(/auto/, 0));
   var limit   = $('#comment_component').offset().top - parseFloat($('#comment_component').css('marginTop').replace(/auto/, 0)) - $header.height();
@@ -12,9 +13,11 @@ $(document).ready(function()
 
     if (y >= top && !$header.hasClass('fixed')) {
       $header.addClass('fixed');
+      $header2.addClass('fixed');
     }
     else if (y < top && $header.hasClass('fixed')){
       $header.removeClass('fixed');
+      $header2.removeClass('fixed');
       $header.css({'top' : 0});
     }
 

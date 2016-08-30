@@ -105,6 +105,11 @@ class changeStatusAction extends crewAction
 
     $this->forward404Unless($file, 'File `%s` Not Found', $id);
 
+    // I'm on it status only applies to branch
+    if ($status == BranchPeer::ONIT) {
+      $status = BranchPeer::A_TRAITER;
+    }
+
     $oldStatus = $file->getStatus();
 
     $file->changeStatus($status, $this->getUser()->getId(), $con);

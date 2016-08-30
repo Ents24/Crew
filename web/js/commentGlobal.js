@@ -76,5 +76,11 @@ $(document).ready(function() {
     if (e.keyCode == 27) {
       closePopup();
     }
+    var $focused = $(':focus');
+    if ((e.keyCode == 13 || e.keyCode == 10) && e.ctrlKey == true && $focused.prop('tagName') == 'TEXTAREA') {
+      e.preventDefault();
+      $focused.parent().find('button[type=submit]').click();
+    }
+
   });
 });

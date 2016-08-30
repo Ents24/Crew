@@ -60,6 +60,17 @@ class GitCommand
 
   /**
    * @param string $gitDir
+   * @param string $branch
+   * @return boolean
+   */
+  public function hasBranch($gitDir, $branch)
+  {
+    $result = $this->exec('git --git-dir=%s branch | grep %s | sed "s/ //g"', array($gitDir, $branch));
+    return count($result) > 0 && trim($result[0]) == trim($branch);
+  }
+
+  /**
+   * @param string $gitDir
    * @param string $referenceCommit
    * @param string $lastCommit
    * @param bool $withDetails
