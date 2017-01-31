@@ -4,7 +4,8 @@ fileSuccess:
     - fixedListHead.js
     - fileNavigation.js
     - toggleDiffRange.js
-    - vendor/minimap.min.js
+    - vendor/jquery.fracs.js
+    - vendor/jquery.outline.js
   stylesheets:
     - vendor/minimap.min.css
 

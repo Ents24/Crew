@@ -113,8 +113,25 @@
     </div>
   </div>
 </div>
+<canvas id='outline' width='200' height='400'></canvas>
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#minimapcontent').minimap();
-  })
-</script>
+    $('#outline').fracs('outline', {
+        crop: true,
+        styles: [ 
+            {
+              selector: 'td.added',
+              fillStyle: '#66ff66'
+            },  
+            {
+              selector: 'td.deleted',
+              fillStyle: '#ff6666'
+            },  
+            {
+              selector: 'div.comment',
+              fillStyle: '#6666ff'
+            }
+        ]
+    });
+  });
+  </script>
