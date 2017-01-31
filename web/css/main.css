@@ -78,6 +78,9 @@
 }
 .list .list_head .status > a.status-valid { background:url('../images/accept.gif') 0 0 no-repeat; }
 .list .list_head .status > a.status-invalid { background:url('../images/cancel.gif') 0 0 no-repeat; }
+.list .list_head .build_result_success { color:green; }
+.list .list_head .build_result_unstable { color:yellow; }
+.list .list_head .build_result_failure { color:red; }
 .list .list_body.scrollable {
   max-height:228px;
   overflow-y:scroll;
@@ -216,6 +219,7 @@
   font-size:21px;
   margin-right:3px;
 }
+.list .list_body table tr td.file_name .ricon.binary { color:#999999; }
 .list .list_body table tr td.branch_name { white-space:nowrap; }
 .list .list_body table tr td.branch_name .new {
   background-color:#4183c4;
@@ -486,6 +490,15 @@
   font-size:12px;
 }
 .list_body.data table .line_comment .clipper { width:925px; }
+.list_body.data .imageDiff {
+  float:left;
+  margin:20px;
+  width:46%;
+}
+.list_body.data .imageDiff img {
+  border:1px solid #ff99aa;
+  max-width:100%;
+}
 .form {
   display:inline-block;
   width:auto;
@@ -1132,3 +1145,37 @@ html body .footer .logoCrew:hover { opacity:1; }
 }
 .clickable { cursor:pointer; }
 #admin_project_add { width:510px; }
+
+#shortcuthelp {
+  display: none;
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  border: 1px solid #D6DADC;
+  background: #EDEFF0;
+  border-radius: 3px;
+  padding:10px;
+  z-index:2000;
+}
+
+#shortcuthelp h1 {
+  font-size: 18px;
+  margin: 0 0 9px;
+  line-height: 1.2em;
+  color: #4d4d4d;
+}
+
+#shortcuthelp span.shortcut {
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid #D6DADC;
+  border-bottom-color: #CDD2D4;
+  box-shadow: 0 2px 3px rgba(0,0,0,.1);
+  color: #4d4d4d;
+  cursor: default;
+  display: inline-block;
+  font-size: 1pc;
+  margin: 0 5px 10px 0;
+  padding: 6px 10px;
+}

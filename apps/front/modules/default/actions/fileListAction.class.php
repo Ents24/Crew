@@ -70,7 +70,23 @@ class fileListAction extends crewAction
       $commitTo, 
       false
     );
-    
+
+    $jenkinsEnabled = sfConfig::get('app_jenkins_enabled', false);
+    $this->jobResults = [];
+    if($jenkinsEnabled) {
+      $jenkinsUrl = sfConfig::get('app_jenkins_url', null);
+      $jobNames = sfConfig::get('app_jenkins_jobs', null);
+      $jenkins = new Jenkins($jenkinsUrl);
+
+      try {
+        foreach ($jobNames as $jobName) {
+          $this->jobResults[$jobName] = $jenkins->findBuildForBranch($jobName, $this->branch->getName());
+        }   
+      } catch (Exception $e) {
+        //Jenkins is unavailable? Skip loading any job results.
+      }
+    }
+
     $this->files = array();
     foreach ($files as $file)
     {

@@ -23,6 +23,16 @@
   <div class="list_head diff-range<?php $readonly && print " displayed"; ?>">
     <?php include_component('default', 'selectorDiffRange', array('type' => 'branch', 'id' => $branch->getId())); ?>
   </div>
+    <div class="list_head">
+    <span class="title">Build status : </span>
+    <?php foreach($jobResults as $jobName => $build): ?>
+      <?php if($build != null) : ?>
+        <?=$jobName?> = <a href="<?=$build->url?>"><span class="build_result_<?=strtolower($build->result)?>"><?=$build->result?></span></a>
+      <?php else: ?>
+        <?=$jobName?> = NONE
+      <?php endif; ?>
+    <?php endforeach; ?>
+  </div>
   <?php $pathDirOld = ""; ?>
   <?php $maxLength = 110; ?>
   <?php $defaultParametersUrlFile = array(
@@ -47,15 +57,14 @@
         <td class="file_name">
           <h3>
             <?php if ($file['ReviewRequest'] == 1): ?><span class="ricon">i</span><?php endif; ?>
-            <?php if (!$file['IsBinary']):?>
-              <a 
-                class="tooltip" 
-                href="<?php echo url_for("default/file?" . http_build_query(array_merge($defaultParametersUrlFile, array('file' => $file['Id'])))); ?>" 
-                title="<?php echo stringUtils::trimTicketInfos($file['LastChangeCommitDesc'])?>">
-            <?php endif; ?>
-            <span style="display: none;"><?php echo ($pathDir !== ".")?stringUtils::lshorten($pathDir . '/', $maxLength - strlen($filename)):''; ?></span><?php echo stringUtils::lshorten($filename, $maxLength); ?>
+            <a
+              class="tooltip"
+              href="<?php echo url_for("default/file?" . http_build_query(array_merge($defaultParametersUrlFile, array('file' => $file['Id'])))); ?>" 
+              title="<?php echo stringUtils::trimTicketInfos($file['LastChangeCommitDesc'])?>">
+              <span style="display: none;"><?php echo ($pathDir !== ".")?stringUtils::lshorten($pathDir . '/', $maxLength - strlen($filename)):''; ?></span><?php echo stringUtils::lshorten($filename, $maxLength); ?>
+            </a>
             <?php if ($file['IsBinary']):?>
-              </a>
+              <span class="ricon binary" title="Binary file">Ñ</span>
             <?php endif; ?>
           </h3>
         </td>

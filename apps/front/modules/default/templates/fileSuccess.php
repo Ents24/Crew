@@ -19,6 +19,7 @@
         ); ?>
         <?php if ('D' !== $file->getState() && !$file->getIsBinary()): ?>
           <?php echo link_to('View file', 'default/fileContent', array('title' => 'View entire file', 'query_string' => http_build_query(array_merge($defaultParametersUrlFile, array('file' => $file->getId()))), 'target' => '_blank')) ?>
+          <?php echo link_to('Hide whitespace', 'default/file', array('title' => 'Hide Whitespace Changes', 'query_string' => http_build_query(array_merge($defaultParametersUrlFile, array('file' => $file->getId(), 's' => true))))) ?>
         <?php endif; ?>
         <?php if (null !== $previousFileId): ?>
           <?php echo link_to('<< Previous file', 'default/file', array('title' => 'Previous file', 'query_string' => http_build_query(array_merge($defaultParametersUrlFile, array('file' => $previousFileId))), 'class' => 'previous')) ?>
@@ -33,11 +34,22 @@
         <?php include_component('default', 'selectorDiffRange', array('type' => 'file', 'id' => $file->getId())); ?>
       </div>
       <?php if(!$file->getIsBinary()): ?>
-        <table>
+        <table id="minimapcontent">
           <tbody>
           <?php $deleledLinesCounter = 0; ?>
           <?php $addedLinesCounter = 0; ?>
           <?php $position = 0; ?>
+          <?php
+          $isFileUTF8 = sfToolkit::isUTF8(implode("\n", $fileContentLines->getRawValue()));
+          
+          if (!$isFileUTF8) {
+            $previousSfCharset = sfConfig::get('sf_charset');
+            
+            // If file isn't detected as UTF-8, we fallback to ISO-8859-1 to prevent symfony escaping from blowing up $fileContentLines
+            // Could be improved with better encoding detection and not only 2 values to choose from
+            sfConfig::set('sf_charset', 'ISO-8859-1');
+          }
+          ?>
           <?php foreach ($fileContentLines as $fileContentLine): ?>
             <?php $position++; ?>
             <?php $deleledLinesCounter += substr($fileContentLine, 0, 1) == '+' ? 0 : 1; ?>
@@ -74,10 +86,24 @@
                 )); ?>
             <?php endif; ?>
             <?php endforeach; ?>
+            <?php if (isset($previousSfCharset)) sfConfig::set('sf_charset', $previousSfCharset); ?>
           </tbody>
         </table>
       <?php else: ?>
-        <div class="flashMessage error">This is a binary file.</div>
+        <div>
+          <div class="imageDiff old">
+            <?php if (!$oldImageExists): ?><div class="flashMessage notice">No binary file in this revision.</div>
+            <?php elseif (is_null($oldImageType)): ?><div class="flashMessage error">This is an unknown type binary file.</div>
+            <?php else: ?><img src="data:image/<?php echo $oldImageType ?>;base64,<?php echo $oldImageContent ?>" title="<?php echo $file->getFilename() ?>" />
+            <?php endif;?>
+          </div>
+          <div class="imageDiff new">
+            <?php if (!$newImageExists): ?><div class="flashMessage notice">No binary file in this revision.</div>
+            <?php elseif (is_null($newImageType)): ?><div class="flashMessage error">This is an unknown type binary file.</div>
+            <?php else: ?><img src="data:image/<?php echo $newImageType ?>;base64,<?php echo $newImageContent ?>" title="<?php echo $file->getFilename() ?>" />
+            <?php endif;?>
+          </div>
+        </div>
       <?php endif; ?>
     </div>
     <div id="comment_component" class="comments_holder">
@@ -87,3 +113,36 @@
     </div>
   </div>
 </div>
+<div id="shortcuthelp">
+  <h1>Keyboard Shortcuts</h1>
+  <span class="shortcut">U</span>Set file to Todo<br>
+  <span class="shortcut">I</span>Set file to Invalid<br>
+  <span class="shortcut">O</span>Set file to Valid<br>
+  <span class="shortcut">J</span>Jump to next change<br>
+  <span class="shortcut">K</span>Jump to previous change<br>
+  <span class="shortcut">H</span>Move to previous file<br>
+  <span class="shortcut">L</span>Move to next file<br>
+  <span class="shortcut">?</span>Open this window<br>
+</div>
+<canvas id='outline' width='200' height='400'></canvas>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#outline').fracs('outline', {
+        crop: true,
+        styles: [ 
+            {
+              selector: 'td.added',
+              fillStyle: '#66ff66'
+            },  
+            {
+              selector: 'td.deleted',
+              fillStyle: '#ff6666'
+            },  
+            {
+              selector: 'div.comment',
+              fillStyle: '#6666ff'
+            }
+        ]
+    });
+  });
+  </script>

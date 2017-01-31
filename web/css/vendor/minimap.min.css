@@ -1,0 +1,10 @@
+#outline {
+	position: fixed;
+	z-index: 21;
+	top: 78px;
+	right: 350px;
+	width: 80px;
+	height: 791px;
+	background: #fffaf0;
+	border: 1px solid #cccccc;
+}

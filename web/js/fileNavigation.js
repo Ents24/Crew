@@ -31,6 +31,10 @@ $(document).ready(function() {
       window.location = location;
     }
   };
+  
+  var changeStatus = function (selector) {
+    $(selector).click();
+  };
 
   $(document)
     .keydown(function(e) {
@@ -54,6 +58,22 @@ $(document).ready(function() {
           break;
         case 76: //l
           changeFile('a.next');
+          break;
+        case 73: //i
+          //invalid file
+          changeStatus('a.invalidate');
+          break;
+        case 79: //o 
+          //valid file
+          changeStatus('a.validate');
+          break;
+        case 85: //u
+          //todo
+          changeStatus('a.todo');
+          break;
+        case 191: //?
+          //toggle shortcuts help
+          $('#shortcuthelp').toggle();
           break;
       }
     })
