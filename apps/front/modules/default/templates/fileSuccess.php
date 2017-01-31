@@ -113,6 +113,17 @@
     </div>
   </div>
 </div>
+<div id="shortcuthelp">
+  <h1>Keyboard Shortcuts</h1>
+  <span class="shortcut">U</span>Set file to Todo<br>
+  <span class="shortcut">I</span>Set file to Invalid<br>
+  <span class="shortcut">O</span>Set file to Valid<br>
+  <span class="shortcut">J</span>Jump to next change<br>
+  <span class="shortcut">K</span>Jump to previous change<br>
+  <span class="shortcut">H</span>Move to previous file<br>
+  <span class="shortcut">L</span>Move to next file<br>
+  <span class="shortcut">?</span>Open this window<br>
+</div>
 <canvas id='outline' width='200' height='400'></canvas>
 <script type="text/javascript">
   $(document).ready(function() {

@@ -67,7 +67,14 @@ $(document).ready(function() {
           //valid file
           changeStatus('a.validate');
           break;
-          
+        case 85: //u
+          //todo
+          changeStatus('a.todo');
+          break;
+        case 191: //?
+          //toggle shortcuts help
+          $('#shortcuthelp').toggle();
+          break;
       }
     })
     .keyup(function(e) {
