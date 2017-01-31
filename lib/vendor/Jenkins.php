@@ -59,7 +59,7 @@ class Jenkins
     // make sure we got a 200
     $code = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
     if ($code != 200) {
-      throw new Exception($code, "HTTP status code: $code, response=$response, url=$url", $code);
+      throw new Exception("HTTP status code: $code, response=$response, url=$url", $code);
     }
 
     curl_close($ch);
