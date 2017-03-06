@@ -230,10 +230,6 @@ class HipChat {
    */
   public function curl_request($url, $post_data = null) {
 
-    if (is_array($post_data)) {
-      $post_data = array_map(array($this, "sanitize_curl_parameter"), $post_data);
-    }
-
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -242,6 +238,10 @@ class HipChat {
     if (is_array($post_data)) {
       curl_setopt($ch, CURLOPT_POST, 1);
       curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+    }
+    if(defined(CURLOPT_SAFE_UPLOAD)) {
+      //Disable @ meaning "upload a file" - it means we can't notify people in rooms easily.
+      curl_setopt($ch, CURLOPT_SAFE_UPLOAD, true);
     }
     $response = curl_exec($ch);
 
@@ -263,25 +263,6 @@ class HipChat {
     curl_close($ch);
 
     return $response;
-  }
-
-  /**
-   * Sanitizes the given value as cURL parameter.
-   *
-   * The first value may not be a "@". PHP would treat this as a file upload
-   *
-   * @link http://www.php.net/manual/en/function.curl-setopt.php CURLOPT_POSTFIELDS
-   *
-   * @param string $value
-   * @return string
-   */
-  private function sanitize_curl_parameter ($value) {
-
-    if ((strlen($value) > 0) && ($value[0] === "@")) {
-      return substr_replace($value, '&#64;', 0, 1);
-    }
-
-    return $value;
   }
 
   /**
