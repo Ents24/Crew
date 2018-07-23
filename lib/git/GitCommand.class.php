@@ -39,7 +39,7 @@ class GitCommand
   {
     $this->fetch($gitDir);
 
-    $result = $this->exec('git --git-dir=%s branch --no-merged %s | grep %s | sed "s/ //g"', array($gitDir, $baseBranch, $branch));
+    $result = $this->exec('git --git-dir=%s branch --no-merged %s | grep %s | sed "s/ //g"', array($gitDir, $baseBranch, "$branch"));
     if(count($result) == 0 || strpos($result[0], '->') !== false || $result[0] != $branch)
     {
       return null;
@@ -65,7 +65,7 @@ class GitCommand
    */
   public function hasBranch($gitDir, $branch)
   {
-    $result = $this->exec('git --git-dir=%s branch | grep %s | sed "s/ //g"', array($gitDir, $branch));
+    $result = $this->exec('git --git-dir=%s branch | grep %s | sed "s/ //g"', array($gitDir, "$branch"));
     return count($result) > 0 && trim($result[0]) == trim($branch);
   }
 
@@ -78,8 +78,6 @@ class GitCommand
    */
   public function getDiffFilesFromBranch($gitDir, $referenceCommit, $lastCommit, $withDetails = true)
   {
-    $this->fetch($gitDir);
-
     $results = $this->exec('git --git-dir=%s diff %s..%s --name-status', array($gitDir,  $referenceCommit, $lastCommit));
 
     if($withDetails)
@@ -126,8 +124,6 @@ class GitCommand
    */
   public function getShowFile($gitDir, $currentCommit, $filename)
   {
-    $this->fetch($gitDir);
-
     return $this->execReturnRaw('git --git-dir=%s show %s:%s', array($gitDir, $currentCommit, $filename));
   }
 
@@ -141,8 +137,6 @@ class GitCommand
    */
   public function getShowFileFromBranch($gitDir, $referenceCommit, $currentCommit, $filename, $options = array())
   {
-    $this->fetch($gitDir);
-
     $gitDiffOptions = array(
       '-U9999'
     );
