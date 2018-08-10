@@ -33,6 +33,7 @@ class commentGlobalComponent extends sfComponent
           ->filterByType($this->type)
           ->filterByBranchId($this->id)
           ->leftJoin('sfGuardUserRelatedByUserId')
+          ->orderByCreatedAt()
           ->find()
         ;
         break;
@@ -50,6 +51,7 @@ class commentGlobalComponent extends sfComponent
           ->filterByType($this->type)
           ->filterByFileId($this->id)
           ->leftJoin('sfGuardUserRelatedByUserId')
+          ->orderByCreatedAt()
           ->find()
         ;
         break;
